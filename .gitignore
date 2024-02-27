@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+.next
+
+# production
+/build
+/out
+
+# package-lock.json
+package-lock.json
+yarn.lock
+
+# local env files
+.env*.local
+
+# typescript
+next-env.d.typescript
+
+# etc
+dist

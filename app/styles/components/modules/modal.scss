@@ -1,0 +1,39 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  background: $white;
+
+  &__header {
+    position: relative;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    padding: 1.2rem;
+  }
+
+  &__title {
+    @include font($black, 600, 1.6rem);
+    text-align: center;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.2rem;
+
+    img {
+      width: 2.4rem;
+    }
+  }
+
+  &__content {
+    &:empty {
+      @include flex();
+    }
+  }
+}

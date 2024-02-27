@@ -1,0 +1,22 @@
+/**
+ * global scss
+ */
+
+@import 'sass-rem';
+$rem-baseline: 10px;
+
+// font
+@import './base/fonts.scss';
+
+// use
+@import './base/variables.scss';
+@import './base/mixins.scss';
+@import './base/extends.scss';
+
+// common
+@import './base/common.scss';
+@import './base/reset.scss';
+@import './base/layout.scss';
+
+// components
+@import './components/modules/modal.scss';

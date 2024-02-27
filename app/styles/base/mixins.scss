@@ -1,0 +1,244 @@
+@mixin clear() {
+  &:after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}
+
+//이미지 Resizing
+@mixin imageResize($type: 'width') {
+  overflow: hidden;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+
+    @if ($type == 'width') {
+      width: 100%;
+      height: auto;
+    } @else if ($type == 'height') {
+      width: auto;
+      height: 100%;
+    } @else if ($type == 'auto') {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+
+//말줄임 후략
+@mixin line($lineCount: 1) {
+  /* 사용법 : @include line(라인수) */
+  @if ($lineCount == 1) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else if($lineCount == 'auto') {
+    display: block;
+    overflow: visible;
+  } @else {
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+
+    /* autoprefixer: on */
+    display: block;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-line-clamp: $lineCount;
+  }
+}
+
+//font guide
+$lineheights: (
+  //mo
+  1.1rem: rem(18px),
+  1.2rem: rem(18px),
+  1.3rem: rem(19px),
+  1.4rem: rem(22px),
+  1.5rem: rem(24px),
+  1.6rem: rem(24px),
+  1.8rem: rem(27px),
+  2rem: rem(30px),
+  2.8rem: rem(42px),
+  //pc
+  9px: 13px,
+  11px: 16px,
+  12px: 16px,
+  13px: 19px,
+  14px: 22px,
+  15px: 22px,
+  16px: 24px,
+  18px: 27px,
+  20px: 30px,
+  24px: 36px,
+  32px: 44px,
+  40px: 56px
+);
+
+@mixin font($color: $black, $weight: 200, $size: rem(13px), $lineheight: none) {
+  @if ($color) {
+    color: $color;
+  }
+  @if ($weight) {
+    font-weight: $weight;
+  }
+  @if ($size) {
+    font-size: $size;
+  }
+  @if ($lineheight != 'none') {
+    line-height: $lineheight;
+  } @else {
+    line-height: map-get($lineheights, $size);
+  }
+}
+
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@mixin scrollX($type: 'mobile') {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  @if ($type == 'mobile') {
+    padding: rem(0 16px);
+    &::-webkit-scrollbar {
+      display: none;
+
+      &-thumb {
+        display: none;
+      }
+
+      &-button {
+        display: none;
+      }
+    }
+  } @else {
+    padding: rem(0 16px);
+
+    &::-webkit-scrollbar {
+      height: 6px;
+
+      &-thumb {
+        background: $greye8;
+        border-radius: 20px;
+      }
+    }
+  }
+}
+
+//#111 기준
+@function dim($opacity: 0.5) {
+  @return rgba(17, 17, 17, $opacity);
+}
+
+//mobile division Border
+@mixin mobileDivision($direction: 'bottom', $weight: rem(10px), $bg: $greyf2) {
+  border-#{$direction}: $weight solid $bg;
+}
+
+@mixin desktopDivision($direction: 'bottom', $weight: rem(10px), $bg: $greyf2) {
+  border-#{$direction}: $weight solid $bg;
+}
+
+//image url
+@function src($deviceType: 'mobile', $folder: 'guide', $filename: '') {
+  @return '/src/assets/images/#{$deviceType}/#{$folder}/#{$filename}';
+}
+
+// image
+@mixin mobileImage(
+  $width: rem(12px),
+  $height: rem(12px),
+  $group: 'guide',
+  $src: '',
+  $repeat: no-repeat,
+  $position: center center,
+  $size: 100% auto
+) {
+  display: inline-block;
+  width: $width;
+  height: $height;
+  background-image: url(src('mobile', $group, $src));
+  background-repeat: $repeat;
+  background-position: $position;
+  background-size: $size;
+}
+
+@mixin desktopImage(
+  $width: rem(12px),
+  $height: rem(12px),
+  $group: 'guide',
+  $src: '',
+  $repeat: no-repeat,
+  $position: center center,
+  $size: 100% auto
+) {
+  display: inline-block;
+  width: $width;
+  height: $height;
+  background-image: url(src('desktop', $group, $src));
+  background-repeat: $repeat;
+  background-position: $position;
+  background-size: $size;
+}
+
+//width는 좌우 여백과 막대 width를 합한 값입니다.
+@mixin DesktopCustomScrollbar($width: 16px, $direction: 'vertical') {
+  @if ($direction == 'vertical') {
+    padding: 4px 0;
+
+    &::-webkit-scrollbar {
+      width: $width;
+
+      &-thumb {
+        background: $greyaaa;
+        width: 4px;
+        border: calc(($width - 4px) / 2) solid $white; //6px
+        border-radius: 999px;
+      }
+    }
+  }
+}
+
+//width는 좌우 여백과 막대 width를 합한 값입니다.
+@mixin mobileCustomScrollbar($width: rem(20px), $background: $white, $direction: 'vertical') {
+  @if ($direction == 'vertical') {
+    padding: rem(4px 0);
+
+    &::-webkit-scrollbar {
+      width: $width;
+
+      &-thumb {
+        background: $greyccc;
+        width: rem(4px);
+        border: calc(($width - rem(4px)) / 2) solid $background; //6px
+        border-radius: rem(999px);
+      }
+    }
+  }
+}
+
+/**
+ * 줄바꿈 처리
+ */
+@mixin lineWrap() {
+  white-space: pre-line;
+  word-break: break-all;
+}

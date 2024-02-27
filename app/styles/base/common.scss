@@ -1,0 +1,33 @@
+/**
+* [공통 SCSS]
+*/
+
+//IR 기법
+.blind {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.font {
+  //국문 폰트
+  &__noto {
+    font-family: $noto;
+  }
+
+  //숫자 폰트
+  &__number {
+    font-family: $font_n;
+  }
+
+  //영문 폰트
+  &__english {
+    font-family: $font_e;
+  }
+}
+
+.scroll--lock {
+  overflow: hidden;
+}
