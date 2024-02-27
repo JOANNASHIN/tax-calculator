@@ -1,11 +1,14 @@
-import Layout from '@/components/layouts/layout/Layout';
+import React from 'react';
 import style from './style';
 
 const MainContainer = () => {
   return (
-    <Layout css={style}>
+    <section css={style}>
       <h2 className="blind">메인페이지</h2>
-    </Layout>
+      {/* <figure>
+        <img src="/assets/images/content/mo-main-image.png" alt="" />
+      </figure> */}
+    </section>
   );
 };
 

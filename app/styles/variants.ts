@@ -1,7 +1,7 @@
 export const color = {
   black: '#000',
   white: '#fff',
-  bg: '#f5f5f5',
+  bg: '#fbfbfb',
   beige: '#f7f7ee',
   point: '#00b14f',
   green: '#00b14f',
