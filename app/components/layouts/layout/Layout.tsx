@@ -2,7 +2,7 @@ import style from './Layout.style';
 import { useEffect } from 'react';
 import Header from '@/components/layouts/header/Header';
 import Footer from '@/components/layouts/footer/Footer';
-import Modal from '@/components/modules/modal/Modal';
+import Modal from '@/components/modal/Modal';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   /**
