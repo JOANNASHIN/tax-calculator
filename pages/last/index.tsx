@@ -1,11 +1,11 @@
 import Layout from '@/components/layouts/layout/Layout';
-import MainContainer from '@/containers/main/MainContainer';
+import LastContainer from '@/containers/last/LastContainer';
 import type { NextPage } from 'next';
 
 const Index: NextPage = () => {
   return (
     <Layout>
-      <MainContainer />
+      <LastContainer />
     </Layout>
   );
 };

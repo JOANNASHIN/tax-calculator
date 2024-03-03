@@ -1,11 +1,11 @@
 import Layout from '@/components/layouts/layout/Layout';
-import MainContainer from '@/containers/main/MainContainer';
+import CalculatorContainer from '@/containers/calculator/CalculatorContainer';
 import type { NextPage } from 'next';
 
 const Index: NextPage = () => {
   return (
     <Layout>
-      <MainContainer />
+      <CalculatorContainer />
     </Layout>
   );
 };

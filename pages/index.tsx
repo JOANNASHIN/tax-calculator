@@ -1,4 +1,4 @@
-import Container from '@/containers/main/container';
+import Container from '@/containers/main/MainContainer';
 import type { NextPage } from 'next';
 
 const Index: NextPage = () => {

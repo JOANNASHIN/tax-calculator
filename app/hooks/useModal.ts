@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { IHandleModal } from '@/components/modules/modal/Modal';
+import { IHandleModal } from '@/components/modal/Modal';
 
 export const useModal = () => {
   const openModal = (target: RefObject<IHandleModal>) => {
