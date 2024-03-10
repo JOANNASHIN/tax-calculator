@@ -12,7 +12,7 @@ const style = css`
   width: 100%;
 
   .header {
-    &__wrapper {
+    &-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -24,7 +24,7 @@ const style = css`
       box-sizing: border-box;
     }
 
-    &__logo {
+    &-logo {
       span {
         color: ${color.bg};
         font-weight: bold;
@@ -34,12 +34,12 @@ const style = css`
       }
     }
 
-    &__nav {
+    &-nav {
       position: absolute;
       top: 0;
       right: 0;
 
-      &__menu {
+      &-menu {
         padding: 2rem;
 
         img {

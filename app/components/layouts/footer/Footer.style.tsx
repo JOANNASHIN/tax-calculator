@@ -16,7 +16,7 @@ const style = css`
   // box-shadow: ${common.boxShadow};
 
   .footer {
-    &__wrapper {
+    &-wrapper {
       display: flex;
       justify-content: space-around;
       align-items: flex-start;
@@ -27,7 +27,7 @@ const style = css`
       //todo safe-area
     }
 
-    &__menu {
+    &-menu {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -50,7 +50,7 @@ const style = css`
         height: 2rem;
       }
 
-      &__name {
+      &-name {
         margin-top: 0.6rem;
         font-size: 1rem;
       }

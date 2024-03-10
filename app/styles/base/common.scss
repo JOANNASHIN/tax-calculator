@@ -13,17 +13,17 @@
 
 .font {
   //국문 폰트
-  &__noto {
+  &-noto {
     font-family: $noto;
   }
 
   //숫자 폰트
-  &__number {
+  &-number {
     font-family: $font_n;
   }
 
   //영문 폰트
-  &__english {
+  &-english {
     font-family: $font_e;
   }
 }

@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 type TProps = {
-  children: ReactNode;
+  children: string;
 };
 const Title = ({ children }: TProps) => {
-  return <>{children}</>;
+  return <h2 className="survey-title">{children}</h2>;
 };
 
-export default Title;
+export default React.memo(Title);

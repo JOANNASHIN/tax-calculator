@@ -56,18 +56,18 @@ const Modal = forwardRef<IHandleModal, IModalProps>(
         {show && (
           <article className={classNames('modal', className)}>
             {showHeader && (
-              <header className="modal__header">
-                {showTitle && <h2 className="modal__title">{title}</h2>}
+              <header className="modal-header">
+                {showTitle && <h2 className="modal-title">{title}</h2>}
 
                 {showClose && (
-                  <button className="modal__close" onClick={closeModal}>
+                  <button className="modal-close" onClick={closeModal}>
                     <img src="/assets/images/icon/close.svg" alt="닫기" />
                   </button>
                 )}
               </header>
             )}
 
-            <div className="modal__content">{children}</div>
+            <div className="modal-content">{children}</div>
           </article>
         )}
       </>

@@ -1,10 +1,11 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 type TProps = {
   children: ReactNode;
 };
 const Question = ({ children }: TProps) => {
-  return <span style={{ fontWeight: 'bold' }}>{children}</span>;
+  console.log('ques');
+  return <span className="survey-question">{children}</span>;
 };
 
-export default Question;
+export default React.memo(Question);

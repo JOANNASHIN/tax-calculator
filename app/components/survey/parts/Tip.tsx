@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 type TProps = {
   children: ReactNode;
 };
 const Tip = ({ children }: TProps) => {
-  return <>{children}</>;
+  return <p className="survey-tip">{children}</p>;
 };
 
-export default Tip;
+export default React.memo(Tip);

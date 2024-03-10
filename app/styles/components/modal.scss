@@ -7,7 +7,7 @@
   z-index: 999;
   background: $white;
 
-  &__header {
+  &-header {
     position: relative;
     // display: flex;
     // justify-content: space-between;
@@ -15,12 +15,12 @@
     padding: 1.2rem;
   }
 
-  &__title {
+  &-title {
     @include font($black, 600, 1.6rem);
     text-align: center;
   }
 
-  &__close {
+  &-close {
     position: absolute;
     top: 0;
     right: 0;
@@ -31,7 +31,7 @@
     }
   }
 
-  &__content {
+  &-content {
     &:empty {
       @include flex();
     }

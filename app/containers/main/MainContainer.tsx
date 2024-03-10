@@ -4,9 +4,9 @@ import Link from 'next/link';
 const MainContainer = () => {
   return (
     <Link href={'/calculator'}>
-      <section css={style}>
+      <div css={style}>
         <h2 className="blind">메인페이지</h2>
-      </section>
+      </div>
     </Link>
   );
 };

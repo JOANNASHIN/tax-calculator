@@ -1,13 +1,11 @@
-import style from './Layout.style';
 import { useEffect } from 'react';
 import Header from '@/components/layouts/header/Header';
-import Footer from '@/components/layouts/footer/Footer';
 import Modal from '@/components/modal/Modal';
+import { useRouter } from 'next/router';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  /**
-   * rem 세팅
-   */
+  const router = useRouter();
+  /** rem 세팅 */
   const settingRem = () => {
     const htmlDoc = document.documentElement;
     let enSizing = false;
@@ -37,8 +35,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div css={style}>
-      <main>{children}</main>
+    <div className="layout">
+      {router.pathname !== '/' && <Header />}
+      <main className="layout-wrapper">{children}</main>
     </div>
   );
 };
