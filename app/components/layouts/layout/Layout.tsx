@@ -11,7 +11,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     let enSizing = false;
 
     function setFontSize() {
-      if (window.innerWidth > window.innerHeight) return;
+      // pc버전 대응
+      if (window.innerWidth > window.innerHeight) {
+        htmlDoc.style.fontSize = '62.5%';
+        return;
+      }
 
       const remBaseFont = (htmlDoc.offsetWidth / 360) * 62.5; //10px 기준
       htmlDoc.style.fontSize = `${remBaseFont > 62.5 ? remBaseFont : 62.5}%`;
