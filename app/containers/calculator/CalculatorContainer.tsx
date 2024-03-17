@@ -1,16 +1,30 @@
 import Survey from '@/components/survey/Survey';
 import useFunnel from '@/hooks/useFunnel';
 import useForm from '@/hooks/useUpdateForm';
+import { useRouter } from 'next/router';
+
+const MAX_STEP = 2;
 
 const CalculatorContainer = () => {
-  const { step, goPrevStep, goNextStep } = useFunnel();
+  const router = useRouter();
   const { updateForm } = useForm();
+
+  const { step, goPrevStep, goNextStep } = useFunnel({
+    maxStep: MAX_STEP,
+  });
+
+  const checkValidate = () => {};
 
   const handlePrev = () => {
     goPrevStep();
   };
 
   const handleNext = () => {
+    if (MAX_STEP === step) {
+      router.push('/last');
+      return;
+    }
+
     goNextStep();
   };
 
@@ -23,10 +37,10 @@ const CalculatorContainer = () => {
             <em>피상속인(사망자)</em>의 배우자가 있나요?
           </Survey.Question>
           <Survey.Answer>
-            <Survey.Radio name={'test1'} value="Y" onChange={updateForm}>
+            <Survey.Radio name={'test1'} value="Y" onChange={updateForm} required>
               네
             </Survey.Radio>
-            <Survey.Radio name={'test1'} value="N" onChange={updateForm}>
+            <Survey.Radio name={'test1'} value="N" onChange={updateForm} required>
               아니오
             </Survey.Radio>
           </Survey.Answer>
@@ -35,10 +49,10 @@ const CalculatorContainer = () => {
             <em>피상속인(사망자)</em>의 자녀가 있나요?
           </Survey.Question>
           <Survey.Answer>
-            <Survey.Radio name={'test2'} value="Y" onChange={updateForm}>
+            <Survey.Radio name={'test2'} value="Y" onChange={updateForm} required>
               네
             </Survey.Radio>
-            <Survey.Radio name={'test2'} value="N" onChange={updateForm}>
+            <Survey.Radio name={'test2'} value="N" onChange={updateForm} required>
               아니오
             </Survey.Radio>
           </Survey.Answer>
@@ -52,10 +66,10 @@ const CalculatorContainer = () => {
           <Survey.Title>상속공제</Survey.Title>
           <Survey.Question>그 밖의 인적공제를 계산하겠습니까?</Survey.Question>
           <Survey.Answer>
-            <Survey.Radio name={'test2'} value="Y" onChange={updateForm}>
+            <Survey.Radio name={'test3'} value="Y" onChange={updateForm}>
               네
             </Survey.Radio>
-            <Survey.Radio name={'test2'} value="N" onChange={updateForm}>
+            <Survey.Radio name={'test3'} value="N" onChange={updateForm}>
               아니오
             </Survey.Radio>
           </Survey.Answer>
