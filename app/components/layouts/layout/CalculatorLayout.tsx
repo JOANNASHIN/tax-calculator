@@ -1,10 +1,7 @@
 import { useEffect } from 'react';
 import Header from '@/components/layouts/header/Header';
-import Modal from '@/components/modal/Modal';
-import { useRouter } from 'next/router';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
+const CalculatorLayout = ({ children }: { children: React.ReactNode }) => {
   /** rem 세팅 */
   const settingRem = () => {
     const htmlDoc = document.documentElement;
@@ -39,10 +36,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div className="layout">
+    <div className="layout layout--calculator">
+      <Header />
       <main className="layout-wrapper">{children}</main>
     </div>
   );
 };
 
-export default Layout;
+export default CalculatorLayout;

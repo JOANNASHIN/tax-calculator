@@ -1,12 +1,12 @@
-import Layout from '@/components/layouts/layout/Layout';
+import CalculatorLayout from '@/components/layouts/layout/CalculatorLayout';
 import CalculatorContainer from '@/containers/calculator/CalculatorContainer';
 import type { NextPage } from 'next';
 
 const Index: NextPage = () => {
   return (
-    <Layout>
+    <CalculatorLayout>
       <CalculatorContainer />
-    </Layout>
+    </CalculatorLayout>
   );
 };
 
