@@ -2,6 +2,7 @@ import Title from './parts/Title';
 import Question from './parts/Question';
 import Answer from './parts/Answer';
 import Radio from './parts/Radio';
+import Checkbox from './parts/Checkbox';
 import Toggle from './parts/Toggle';
 import InputText from './parts/InputText';
 import Tip from './parts/Tip';
@@ -21,6 +22,7 @@ export default Object.assign(Survey, {
   Question,
   Answer,
   Radio,
+  Checkbox,
   Toggle,
   InputText,
   Tip,

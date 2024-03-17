@@ -3,11 +3,12 @@ import React, { ChangeEvent } from 'react';
 type TProps = {
   [key: string]: unknown;
   name: string;
+  value: string;
   children: string;
   onChange: (payload: any) => void;
 };
 
-const Radio = ({ children: Label, onChange, name: PropsName, ...props }: TProps) => {
+const Radio = ({ children: Label, onChange, name: PropsName, value, ...props }: TProps) => {
   const handleChange = (e: ChangeEvent) => {
     onChange({
       name: PropsName,
@@ -15,8 +16,8 @@ const Radio = ({ children: Label, onChange, name: PropsName, ...props }: TProps)
     });
   };
   return (
-    <label className="radio">
-      <input type="radio" name={PropsName} {...props} onChange={handleChange} />
+    <label className="survey-checkbox">
+      <input type="radio" name={PropsName} value={value} {...props} onChange={handleChange} />
       <span>{Label}</span>
     </label>
   );

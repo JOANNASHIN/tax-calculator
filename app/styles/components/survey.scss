@@ -57,10 +57,10 @@ $xPadding: 2rem;
     }
   }
 
-  .radio {
+  .survey-checkbox {
     margin-right: 2rem;
 
-    input[type='radio'] {
+    input {
       display: none;
 
       &:checked + span:before {
