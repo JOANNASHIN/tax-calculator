@@ -1,9 +1,21 @@
 import { atom } from 'recoil';
 
-export const calculatorFormState = atom({
+type YN = 'Y' | 'N' | '';
+export type TForm = {
+  'step1-1': YN;
+  'step1-2': YN;
+  'step2-1': YN;
+  'step2-2': YN;
+  'step2-3': string[];
+};
+
+export const calculatorFormState = atom<TForm>({
   key: 'calculatorFormState',
   default: {
-    test1: 'Y',
-    test2: 'Y',
+    'step1-1': '',
+    'step1-2': '',
+    'step2-1': '',
+    'step2-2': '',
+    'step2-3': [],
   },
 });
