@@ -20,6 +20,10 @@ $headerHeight: 4rem;
       margin: 0 auto;
       max-width: 500px;
     }
+
+    .layout-wrapper {
+      height: auto;
+    }
   }
 
   &.scroll--lock {
@@ -33,5 +37,6 @@ $headerHeight: 4rem;
 
   &-wrapper {
     width: 100%;
+    height: 100%;
   }
 }
