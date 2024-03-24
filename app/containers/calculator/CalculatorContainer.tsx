@@ -158,18 +158,18 @@ const CalculatorContainer = () => {
 
         <Survey.Question>상속인 및 동거가족 중 해당사항이 있는 공제를 선택하세요.</Survey.Question>
         <Survey.Answer>
-          <Survey.Checkbox name={'step2-6'} value="부모" onChange={updateForm}>
+          <Survey.Checkbox name={'step2-6'} value="미성년자공제" onChange={updateForm}>
             미성년자공제
           </Survey.Checkbox>
           <Survey.InputNumber name={'step2-6-1'} placeholder={'N'} onChange={updateForm} unit="명" />
           <br />
           <br />
-          <Survey.Checkbox name={'step2-6'} value="손자녀" onChange={updateForm}>
+          <Survey.Checkbox name={'step2-6'} value="연로자공제" onChange={updateForm}>
             연로자공제
           </Survey.Checkbox>
           <br />
           <br />
-          <Survey.Checkbox name={'step2-6'} value="형제자매" onChange={updateForm}>
+          <Survey.Checkbox name={'step2-6'} value="장애인공제" onChange={updateForm}>
             장애인공제
           </Survey.Checkbox>
         </Survey.Answer>
