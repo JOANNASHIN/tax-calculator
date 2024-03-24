@@ -14,7 +14,9 @@ const useForm = () => {
     }) => {
       setForm(prevForm => {
         let value = payload.value;
+        console.log(value, 'update');
 
+        //체크박스면 배열로 처리
         if (payload.type === 'checkbox') {
           const prevCheckboxValue = prevForm[payload.name] as string[];
           const checkboxValue = payload.value as string;
@@ -24,10 +26,9 @@ const useForm = () => {
           } else {
             value = prevCheckboxValue.filter(v => v !== checkboxValue);
           }
-
-          console.log(value, 'value');
         }
 
+        //기타
         return {
           ...prevForm,
           [payload.name]: value,
