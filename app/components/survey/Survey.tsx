@@ -1,4 +1,5 @@
 import Title from './parts/Title';
+import Box from './parts/Box';
 import Question from './parts/Question';
 import Answer from './parts/Answer';
 import Radio from './parts/Radio';
@@ -21,12 +22,14 @@ const Survey = ({ children }: TProps) => {
 
 export default Object.assign(Survey, {
   Title,
+  Box,
   Question,
   Answer,
   Radio,
   Checkbox,
   Selectbox,
   Toggle,
+  InputText,
   InputNumber,
   Tip,
   Button,

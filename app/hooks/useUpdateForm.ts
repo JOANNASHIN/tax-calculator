@@ -14,7 +14,6 @@ const useForm = () => {
     }) => {
       setForm(prevForm => {
         let value = payload.value;
-        console.log(value, 'update');
 
         //체크박스면 배열로 처리
         if (payload.type === 'checkbox') {

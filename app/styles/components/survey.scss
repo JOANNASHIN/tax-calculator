@@ -9,16 +9,20 @@ $xPadding: 2rem;
   // todo: pc버전
 
   &-title {
-    margin-bottom: 4rem;
+    margin-top: 4rem;
     font-size: 2.2rem;
     font-weight: bold;
     line-height: 1.5;
   }
 
+  &-box {
+    margin-top: 4rem;
+  }
+
   &-question {
     display: block;
     font-size: 1.4rem;
-    margin-bottom: 2rem;
+    // margin-bottom: 2rem;
 
     em {
       font-weight: 600;
@@ -26,11 +30,11 @@ $xPadding: 2rem;
   }
 
   &-answer {
-    margin-bottom: 4rem;
+    margin-top: 2rem;
   }
 
   &-tip {
-    margin-bottom: 4rem;
+    margin-top: 2rem;
     color: #aaa;
     font-size: 1.2rem;
     line-height: 1.5;

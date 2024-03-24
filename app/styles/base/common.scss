@@ -31,3 +31,9 @@
 .scroll--lock {
   overflow: hidden;
 }
+
+.color {
+  &-red {
+    color: $red;
+  }
+}
