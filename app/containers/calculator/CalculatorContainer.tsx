@@ -36,7 +36,7 @@ const CalculatorContainer = () => {
 
   return (
     <Survey.Box>
-      {/* 상속인 */}
+      {/* 1. 상속인 */}
       <Survey>
         <Survey.Title>상속인</Survey.Title>
         <Survey.Box>
@@ -84,7 +84,7 @@ const CalculatorContainer = () => {
         )}
       </Survey>
 
-      {/* 상속공제 */}
+      {/* 2. 상속공제 */}
       <Survey>
         <Survey.Title>상속공제</Survey.Title>
         {/* Q */}
@@ -304,7 +304,7 @@ const CalculatorContainer = () => {
         )}
       </Survey>
 
-      {/* 상속재산 */}
+      {/* 3. 상속재산 */}
       <Survey>
         <Survey.Title>상속재산</Survey.Title>
 
@@ -384,12 +384,12 @@ const CalculatorContainer = () => {
         </Survey.Box>
       </Survey>
 
-      {/* 채무, 장례비용 */}
+      {/* 4. 채무, 장례비용 */}
       <Survey>
         <Survey.Title>채무, 장례비용</Survey.Title>
 
         <Survey.Box>
-          <Survey.Question>채무등 차감 항목을 선택하세요.</Survey.Question>
+          <Survey.Question>채무 등 차감 항목을 선택하세요.</Survey.Question>
           <Survey.Answer>
             <Survey.Checkbox name={'step2-9'} value="일반채무" onChange={updateForm}>
               채무 (일반)
@@ -477,7 +477,7 @@ const CalculatorContainer = () => {
                   unit="원"
                 />
                 <Survey.Tip>
-                *봉안시설, 자연장지비용의 한도는 500만원입니다.
+                  *봉안시설, 자연장지비용의 한도는 500만원입니다.
                   <br />
                 </Survey.Tip>
               </>
@@ -498,8 +498,9 @@ const CalculatorContainer = () => {
                   unit="원"
                 />
                 <Survey.Tip>
-                *상속재산을 감정평가 받은 경우 해당 수수료를 입력하세요.<br />
-*부동산평가시 한도금액 (500만원)
+                  *상속재산을 감정평가 받은 경우 해당 수수료를 입력하세요.
+                  <br />
+                  *부동산평가시 한도금액 (500만원)
                   <br />
                 </Survey.Tip>
               </>
@@ -509,6 +510,103 @@ const CalculatorContainer = () => {
           </Survey.Answer>
         </Survey.Box>
       </Survey>
+
+      {/* 5. 사전증여재산 여부 */}
+      <Survey>
+        <Survey.Title>사전증여재산 여부</Survey.Title>
+
+        <Survey.Box>
+          <Survey.Question>5년이내에 상속인 외 사람에게 사전에 증여한 재산이 있나요?</Survey.Question>
+          <Survey.Answer>
+            <Survey.InputText
+              name={'step5-1'}
+              onChange={updateForm}
+              value={0}
+              placeholder="사전증여재산가액 (합산)을 입력하세요."
+              unit="원"
+            />
+            <Survey.Tip>* "상속인 외"는 1.기본사항(상속인) 대상자에 해당되지 않는 자를 의미합니다.</Survey.Tip>
+          </Survey.Answer>
+        </Survey.Box>
+
+        {(form['step1-1'] === 'Y' || form['step1-2'] !== 0) && (
+          <Survey.Box>
+            <Survey.Question>10년이내에 상속인에게 사전에 증여한 재산이 있나요?</Survey.Question>
+            <Survey.Answer>
+              {form['step1-1'] === 'Y' && (
+                <Survey.Box>
+                  <Survey.Checkbox name={'step5-2-1'} value="배우자" onChange={updateForm}>
+                    배우자
+                  </Survey.Checkbox>
+
+                  {form['step5-2-1'] && (
+                    <>
+                      <Survey.InputText
+                        name={'step5-2'}
+                        onChange={updateForm}
+                        value={0}
+                        placeholder="배우자 사전증여재산가액 입력하세요. (합산)"
+                        unit="원"
+                      />
+                      <Survey.Tip>
+                        *부동산가액은 상속개시일 현재의 시가를 입력하며, 시가가 없는경우에는 기준시가를 입력하세요.
+                      </Survey.Tip>
+                    </>
+                  )}
+                </Survey.Box>
+              )}
+
+              {/* Array.from({length: form['step1-2'] ?? 0}) */}
+              {Array.from({ length: form['step1-2'] ?? 0 }).map((c, index) => (
+                  <Survey.Box key={`step5-${index}`}>
+                    <Survey.Checkbox name="step5-3" value={`자녀${index}`} onChange={updateForm}>
+                      자녀 {Number(index + 1)}
+                    </Survey.Checkbox>
+                    {form["step5-3"]?.some(v => v === `자녀${index}`) && (
+                      <>
+                        <Survey.Radio name={`step5-3-${index}`} value="Y" onChange={updateForm}>
+                          미성년자여부
+                        </Survey.Radio>
+                        <Survey.InputText
+                          name={`step5-3-${index}`}
+                          onChange={updateForm}
+                          value={0}
+                          placeholder={`자녀 ${index}의 사전증여재산가액을 입력하세요. (합산)`}
+                          unit="원"
+                        />
+                      </>
+                    )}
+                  </Survey.Box>
+              ))}
+
+              <Survey.Tip>
+                  * 피상속인이 증여한 상속인을 체크하세요.<br/>
+                  * 증여일 현재 만19세 미만인 자인 경우 미성년자를 체크하세요.
+              </Survey.Tip>
+            </Survey.Answer>
+          </Survey.Box>
+        )}
+      </Survey>
+
+        {/* 6. 추가세액공제 여부확인 */}
+        <Survey>
+          <Survey.Title>추가세액공제 여부확인</Survey.Title>
+
+          <Survey.Box>
+            <Survey.Question>5년이내에 상속인 외 사람에게 사전에 증여한 재산이 있나요?</Survey.Question>
+            <Survey.Answer>
+              <Survey.InputText
+                name={'step5-1'}
+                onChange={updateForm}
+                value={0}
+                placeholder="사전증여재산가액 (합산)을 입력하세요."
+                unit="원"
+              />
+              <Survey.Tip>* "상속인 외"는 1.기본사항(상속인) 대상자에 해당되지 않는 자를 의미합니다.</Survey.Tip>
+            </Survey.Answer>
+          </Survey.Box>
+        </Survey>
+
 
       <Survey.Bottom>
         {step !== 1 && (

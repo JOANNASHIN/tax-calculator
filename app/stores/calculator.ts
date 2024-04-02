@@ -13,6 +13,7 @@ export type TForm = {
   'step2-5': string[];
   'step2-6': string[];
   'step2-9': string[];
+  'step5-3': string[];
 };
 
 export const calculatorFormState = atom<TForm>({
@@ -28,5 +29,6 @@ export const calculatorFormState = atom<TForm>({
     'step2-5': [],
     'step2-6': [],
     'step2-9': [],
+    'step5-3': [],
   },
 });
