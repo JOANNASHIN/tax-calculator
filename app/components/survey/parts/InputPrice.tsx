@@ -27,7 +27,7 @@ const InputPrice = ({ onChange, name: PropsName, unit, ...props }: TProps) => {
     });
   };
   return (
-    <label className="survey-input-text">
+    <label className="survey-input-price">
       <input type="tel" name={PropsName} onInput={handleInput} onChange={handleChange} {...props} />
       {unit && <span>{unit}</span>}
     </label>

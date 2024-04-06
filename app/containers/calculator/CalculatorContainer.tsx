@@ -3,6 +3,7 @@ import useFunnel from '@/hooks/useFunnel';
 import useForm from '@/hooks/useUpdateForm';
 import { useRouter } from 'next/router';
 import { MAX_STEP } from './Calculator.constant';
+import React from 'react';
 
 const CalculatorContainer = () => {
   const router = useRouter();
@@ -38,7 +39,9 @@ const CalculatorContainer = () => {
   };
 
   return (
-    <Survey.Box>
+    <div className="survey-wrapper">
+      <h1 className="survey-main-title">상속계산기</h1>
+
       {/* 1. 상속인 */}
       <Survey>
         <Survey.Title>상속인</Survey.Title>
@@ -342,7 +345,7 @@ const CalculatorContainer = () => {
             <br />
             <br />
 
-            <Survey.Checkbox name={'step2-9'} value="기타재산 (권리등)" onChange={updateForm}>
+            <Survey.Checkbox name={'step2-9'} value="기타재산" onChange={updateForm}>
               기타재산 (권리등)
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '기타재산') && (
@@ -505,7 +508,7 @@ const CalculatorContainer = () => {
 
               {/* Array.from({length: form['step1-2'] ?? 0}) */}
               {Array.from({ length: form['step1-2'] ?? 0 }).map((c, index) => (
-                <Survey.Box key={`step5-${index}`}>
+                <React.Fragment key={`step5-${index}`}>
                   <Survey.Checkbox name="step5-3" value={`자녀${index.toString()}`} onChange={updateForm}>
                     {getTitle(index)}
                   </Survey.Checkbox>
@@ -518,7 +521,9 @@ const CalculatorContainer = () => {
                       <Survey.Tip>* 자녀 {index + 1}의 사전증여재산가액을 입력하세요. (합산)</Survey.Tip>
                     </>
                   )}
-                </Survey.Box>
+                  <br />
+                  <br />
+                </React.Fragment>
               ))}
 
               <Survey.Tip>
@@ -580,8 +585,20 @@ const CalculatorContainer = () => {
                 재상속되는 그 재산가액이 이전 전체 상속재산 중 차지하는 비율을 입력하세요.
               </Survey.Question>
               <Survey.Answer>
-                <Survey.InputNumber name={'step6-5'} placeholder={0} maxCount={100} unit="%" onChange={updateForm} />
+                <Survey.InputNumber
+                  name={'step6-5'}
+                  placeholder={0}
+                  maxNumber={100}
+                  size={'m'}
+                  unit="%"
+                  onChange={updateForm}
+                />
               </Survey.Answer>
+              <Survey.Tip>
+                * 1 - 100사이의 숫자를 입력해주세요. <br />
+                * 비율을 정확히 계산하기 위해서는 이전 상속세신고내역이 필요합니다. 이에, 간편법으로 계산합니다. <br />*
+                예를 들어 이전 상속재산전체가액이 10억이고 재상속되는 그 재산가액이 4억인경우 40%를 입력하시면 됩니다.
+              </Survey.Tip>
             </Survey.Box>
           </>
         )}
@@ -595,7 +612,7 @@ const CalculatorContainer = () => {
         )}
         <Survey.Button onClick={handleNext}>Next </Survey.Button>
       </Survey.Bottom>
-    </Survey.Box>
+    </div>
   );
 };
 
