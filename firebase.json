@@ -1,12 +1,7 @@
 {
   "hosting": {
-    "public": "out",
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
+    "site": "tax-calculator-project",
+    "public": "public",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
