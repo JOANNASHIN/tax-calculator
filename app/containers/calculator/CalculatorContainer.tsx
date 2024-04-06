@@ -59,7 +59,7 @@ const CalculatorContainer = () => {
           </Survey.Question>
 
           <Survey.Answer>
-            <Survey.InputNumber name={'step1-2'} placeholder="N" maxLength={20} onChange={updateForm} unit="명" />
+            <Survey.InputNumber name={'step1-2'} placeholder="0" maxLength={20} onChange={updateForm} unit="명" />
           </Survey.Answer>
         </Survey.Box>
 
@@ -71,7 +71,7 @@ const CalculatorContainer = () => {
             <Survey.Answer>
               <Survey.InputNumber
                 name={'step1-3'}
-                placeholder="N"
+                placeholder="0"
                 maxLength={2}
                 onChange={updateForm}
                 disabled={form['step1-2'] == 0}
@@ -116,7 +116,7 @@ const CalculatorContainer = () => {
           <Survey.Box>
             <Survey.Question>배우자가 실제상속받은 금액을 입력하세요.</Survey.Question>
             <Survey.Answer>
-              <Survey.InputNumber name={'step2-3'} onChange={updateForm} placeholder={0} unit="원" />
+              <Survey.InputText name={'step2-3'} onChange={updateForm} placeholder={0} unit="원" />
             </Survey.Answer>
             {/* <Survey.Tip>*최소금액(5억) ~ 최대금액(상속재산범위까지)</Survey.Tip> */}{' '}
           </Survey.Box>
@@ -558,55 +558,92 @@ const CalculatorContainer = () => {
 
               {/* Array.from({length: form['step1-2'] ?? 0}) */}
               {Array.from({ length: form['step1-2'] ?? 0 }).map((c, index) => (
-                  <Survey.Box key={`step5-${index}`}>
-                    <Survey.Checkbox name="step5-3" value={`자녀${index}`} onChange={updateForm}>
-                      자녀 {Number(index + 1)}
-                    </Survey.Checkbox>
-                    {form["step5-3"]?.some(v => v === `자녀${index}`) && (
-                      <>
-                        <Survey.Radio name={`step5-3-${index}`} value="Y" onChange={updateForm}>
-                          미성년자여부
-                        </Survey.Radio>
-                        <Survey.InputText
-                          name={`step5-3-${index}`}
-                          onChange={updateForm}
-                          value={0}
-                          placeholder={`자녀 ${index}의 사전증여재산가액을 입력하세요. (합산)`}
-                          unit="원"
-                        />
-                      </>
-                    )}
-                  </Survey.Box>
+                <Survey.Box key={`step5-${index}`}>
+                  <Survey.Checkbox name="step5-3" value={`자녀${index}`} onChange={updateForm}>
+                    자녀 {Number(index + 1)}
+                  </Survey.Checkbox>
+                  {form['step5-3']?.some(v => v === `자녀${index}`) && (
+                    <>
+                      <Survey.Radio name={`step5-3-${index}`} value="Y" onChange={updateForm}>
+                        미성년자여부
+                      </Survey.Radio>
+                      <Survey.InputText
+                        name={`step5-3-${index}`}
+                        onChange={updateForm}
+                        value={0}
+                        placeholder={`자녀 ${index}의 사전증여재산가액을 입력하세요. (합산)`}
+                        unit="원"
+                      />
+                    </>
+                  )}
+                </Survey.Box>
               ))}
 
               <Survey.Tip>
-                  * 피상속인이 증여한 상속인을 체크하세요.<br/>
-                  * 증여일 현재 만19세 미만인 자인 경우 미성년자를 체크하세요.
+                * 피상속인이 증여한 상속인을 체크하세요.
+                <br />* 증여일 현재 만19세 미만인 자인 경우 미성년자를 체크하세요.
               </Survey.Tip>
             </Survey.Answer>
           </Survey.Box>
         )}
       </Survey>
 
-        {/* 6. 추가세액공제 여부확인 */}
-        <Survey>
-          <Survey.Title>추가세액공제 여부확인</Survey.Title>
+      {/* 6. 추가세액공제 여부확인 */}
+      <Survey>
+        <Survey.Title>추가세액공제 여부확인</Survey.Title>
 
+        <Survey.Box>
+          <Survey.Question>피상속인(사망자)이 이전 10년이내에 상속으로 받은 재산이 있나요?</Survey.Question>
+          <Survey.Answer>
+            <Survey.Radio name={'step6-1'} value="Y" onChange={updateForm} required>
+              네
+            </Survey.Radio>
+            <Survey.Radio name={'step6-1'} value="N" onChange={updateForm} required>
+              아니오
+            </Survey.Radio>
+          </Survey.Answer>
+        </Survey.Box>
+        {form['step6-1'] === 'Y' && (
           <Survey.Box>
-            <Survey.Question>5년이내에 상속인 외 사람에게 사전에 증여한 재산이 있나요?</Survey.Question>
+            <Survey.Question>그 상속받은 재산이 다시 재상속되는 것이 있나요?</Survey.Question>
             <Survey.Answer>
-              <Survey.InputText
-                name={'step5-1'}
-                onChange={updateForm}
-                value={0}
-                placeholder="사전증여재산가액 (합산)을 입력하세요."
-                unit="원"
-              />
-              <Survey.Tip>* "상속인 외"는 1.기본사항(상속인) 대상자에 해당되지 않는 자를 의미합니다.</Survey.Tip>
+              <Survey.Radio name={'step6-2'} value="Y" onChange={updateForm} required>
+                네
+              </Survey.Radio>
+              <Survey.Radio name={'step6-2'} value="N" onChange={updateForm} required>
+                아니오
+              </Survey.Radio>
             </Survey.Answer>
           </Survey.Box>
-        </Survey>
+        )}
 
+        {form['step6-2'] === 'Y' && (
+          <>
+            <Survey.Box>
+              <Survey.Question>이전 상속이후 몇년 이내에 재상속이 되는 것인가요?</Survey.Question>
+              <Survey.Answer>
+                <Survey.InputNumber name={'step6-3'} placeholder="0" maxLength={2} onChange={updateForm} unit="년" />
+              </Survey.Answer>
+            </Survey.Box>
+
+            <Survey.Box>
+              <Survey.Question>이전 상속세 산출세액을 입력하세요.</Survey.Question>
+              <Survey.Answer>
+                <Survey.InputText name={'step6-4'} onChange={updateForm} placeholder={0} unit="원" />
+              </Survey.Answer>
+            </Survey.Box>
+
+            <Survey.Box>
+              <Survey.Question>
+                재상속되는 그 재산가액이 이전 전체 상속재산 중 차지하는 비율을 입력하세요.
+              </Survey.Question>
+              <Survey.Answer>
+                <Survey.InputText name={'step6-5'} onChange={updateForm} placeholder={0} maxLength={3} unit="%" />
+              </Survey.Answer>
+            </Survey.Box>
+          </>
+        )}
+      </Survey>
 
       <Survey.Bottom>
         {step !== 1 && (
