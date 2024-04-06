@@ -13,10 +13,7 @@ const InputNumber = ({ onChange, name: PropsName, unit, maxNumber, ...props }: T
     const target = e.target as HTMLInputElement;
     const value = target.value;
 
-
     target.value = maxNumber &&  Number(value) >= maxNumber ? maxNumber.toString() : value;
-    console.log(value, typeof value, 'value');
-
 
     onChange({
       type: 'number',

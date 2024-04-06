@@ -18,8 +18,6 @@ const InputPrice = ({ onChange, name: PropsName, unit, ...props }: TProps) => {
     const target = e.target as HTMLInputElement;
     const value = target.value.replace(/,/g, '');
 
-    console.log(value, Number(value).toLocaleString('ko-kr'));
-
     target.value = Number(value).toLocaleString('ko-kr');
 
     onChange({
