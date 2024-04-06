@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 
 type TProps = {
   [key: string]: unknown;
@@ -8,14 +8,14 @@ type TProps = {
 };
 
 const InputPrice = ({ onChange, name: PropsName, unit, ...props }: TProps) => {
-  const handleInput = (e: ChangeEvent) => {
+  const handleInput = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const value = target.value.replace(/[^\d]/g, '');
     target.value = value;
   };
 
-  const handleChange = (e: ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const target = e.target;
     const value = target.value.replace(/,/g, '');
 
     target.value = Number(value).toLocaleString('ko-kr');

@@ -33,6 +33,10 @@ const CalculatorContainer = () => {
     goNextStep();
   };
 
+  const getTitle = (index: number) => {
+    return `자녀 ${index + 1}`;
+  };
+
   return (
     <Survey.Box>
       {/* 1. 상속인 */}
@@ -391,12 +395,7 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '금융기관채무') && (
               <>
-                <Survey.InputPrice
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  placeholder={0}
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
                 <Survey.Tip>* 피상속인(사망자)의 채무금액을 입력하세요. (예: 근저당권, 은행채무 등)</Survey.Tip>
               </>
             )}
@@ -408,12 +407,7 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '공과금') && (
               <>
-                <Survey.InputPrice
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  placeholder={0}
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
                 <Survey.Tip>* 피상속인(사망자)의 공과금을 입력하세요. (예: 미납세금, 미납 공공요금 등)</Survey.Tip>
               </>
             )}
@@ -424,12 +418,7 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '장례비') && (
               <>
-                <Survey.InputPrice
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  placeholder={0}
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
                 <Survey.Tip>
                   *장례비는 최소 500만원이 적용됩니다. <br />
                   {/* 입력할 금액이 그 이하인 경우에는 입력하지 마세요. */}
@@ -446,12 +435,7 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '봉안시설자연장지비용') && (
               <>
-                <Survey.InputPrice
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  placeholder={0}
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
                 <Survey.Tip>
                   *봉안시설, 자연장지비용의 한도는 500만원입니다.
                   <br />
@@ -466,12 +450,7 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '감정평가수수료') && (
               <>
-                <Survey.InputPrice
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  placeholder={0}
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
                 <Survey.Tip>
                   *상속재산을 감정평가 받은 경우 해당 수수료를 입력하세요.
                   <br />
@@ -493,17 +472,11 @@ const CalculatorContainer = () => {
         <Survey.Box>
           <Survey.Question>5년이내에 상속인 외 사람에게 사전에 증여한 재산이 있나요?</Survey.Question>
           <Survey.Answer>
-            <Survey.InputPrice
-              name={'step5-1'}
-              onChange={updateForm}
-              
-              placeholder={0}
-              unit="원"
-            />
+            <Survey.InputPrice name={'step5-1'} onChange={updateForm} placeholder={0} unit="원" />
             <Survey.Tip>
-            * 사전증여재산가액 (합산)을 입력하세요.<br />
-              * "상속인 외"는 1.기본사항(상속인) 대상자에 해당되지 않는 자를 의미합니다.
-              </Survey.Tip>
+              * 사전증여재산가액 (합산)을 입력하세요.
+              <br />* "상속인 외"는 1.기본사항(상속인) 대상자에 해당되지 않는 자를 의미합니다.
+            </Survey.Tip>
           </Survey.Answer>
         </Survey.Box>
 
@@ -519,15 +492,11 @@ const CalculatorContainer = () => {
 
                   {form['step5-2-1'] && (
                     <>
-                      <Survey.InputPrice
-                        name={'step5-2'}
-                        onChange={updateForm}
-                        placeholder={0}
-                        unit="원"
-                      />
+                      <Survey.InputPrice name={'step5-2'} onChange={updateForm} placeholder={0} unit="원" />
                       <Survey.Tip>
-                        * 배우자 사전증여재산가액 입력하세요. (합산)<br />
-                        * 부동산가액은 상속개시일 현재의 시가를 입력하며, 시가가 없는경우에는 기준시가를 입력하세요.
+                        * 배우자 사전증여재산가액 입력하세요. (합산)
+                        <br />* 부동산가액은 상속개시일 현재의 시가를 입력하며, 시가가 없는경우에는 기준시가를
+                        입력하세요.
                       </Survey.Tip>
                     </>
                   )}
@@ -538,30 +507,23 @@ const CalculatorContainer = () => {
               {Array.from({ length: form['step1-2'] ?? 0 }).map((c, index) => (
                 <Survey.Box key={`step5-${index}`}>
                   <Survey.Checkbox name="step5-3" value={`자녀${index.toString()}`} onChange={updateForm}>
-                    자녀 {Number(index + 1)}
+                    {getTitle(index)}
                   </Survey.Checkbox>
                   {form['step5-3']?.some(v => v === `자녀${index}`) && (
                     <>
-                      <Survey.Radio name={`step5-3-${index}-1`} onChange={updateForm}>
+                      <Survey.Checkbox name={`step5-3-${index}-1`} value={'teenager'} onChange={updateForm}>
                         미성년자여부
-                      </Survey.Radio>
-                      <Survey.InputPrice
-                        name={`step5-3-${index}-2`}
-                        onChange={updateForm}
-                        placeholder={0}
-                        unit="원"
-                      />
-                      <Survey.Tip>
-                      * 자녀 {index + 1}의 사전증여재산가액을 입력하세요. (합산)
-                      </Survey.Tip>
+                      </Survey.Checkbox>
+                      <Survey.InputPrice name={`step5-3-${index}-2`} onChange={updateForm} placeholder={0} unit="원" />
+                      <Survey.Tip>* 자녀 {index + 1}의 사전증여재산가액을 입력하세요. (합산)</Survey.Tip>
                     </>
                   )}
                 </Survey.Box>
               ))}
 
               <Survey.Tip>
-                * 피상속인이 증여한 상속인을 체크하세요. <br />
-                * 증여일 현재 만19세 미만인 자인 경우 미성년자를 체크하세요.
+                * 피상속인이 증여한 상속인을 체크하세요. <br />* 증여일 현재 만19세 미만인 자인 경우 미성년자를
+                체크하세요.
               </Survey.Tip>
             </Survey.Answer>
           </Survey.Box>
@@ -618,7 +580,7 @@ const CalculatorContainer = () => {
                 재상속되는 그 재산가액이 이전 전체 상속재산 중 차지하는 비율을 입력하세요.
               </Survey.Question>
               <Survey.Answer>
-                <Survey.InputNumber name={'step6-5'} placeholder={0} maxCount={100} unit="%" onChange={updateForm}/>
+                <Survey.InputNumber name={'step6-5'} placeholder={0} maxCount={100} unit="%" onChange={updateForm} />
               </Survey.Answer>
             </Survey.Box>
           </>
