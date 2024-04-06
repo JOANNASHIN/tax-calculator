@@ -17,7 +17,7 @@ const useForm = () => {
 
         //체크박스면 배열로 처리
         if (payload.type === 'checkbox') {
-          const prevCheckboxValue = prevForm[payload.name] as string[];
+          const prevCheckboxValue = (prevForm[payload.name] as string[]) ?? [];
           const checkboxValue = payload.value as string;
 
           if (payload.checked) {
