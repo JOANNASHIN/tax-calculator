@@ -5,11 +5,19 @@ type TProps = {
   name: string;
   unit?: string;
   onChange: (payload: any) => void;
+  maxNumber?: number;
 };
 
-const InputNumber = ({ onChange, name: PropsName, unit, ...props }: TProps) => {
+const InputNumber = ({ onChange, name: PropsName, unit, maxNumber, ...props }: TProps) => {
   const handleChange = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
+    const value = target.value;
+
+
+    target.value = maxNumber &&  Number(value) >= maxNumber ? maxNumber.toString() : value;
+    console.log(value, typeof value, 'value');
+
+
     onChange({
       type: 'number',
       name: PropsName,
@@ -18,7 +26,7 @@ const InputNumber = ({ onChange, name: PropsName, unit, ...props }: TProps) => {
   };
   return (
     <label className="survey-input-number">
-      <input type="tel" name={PropsName} onChange={handleChange} {...props} />
+      <input type="tel" name={PropsName} {...props} onChange={handleChange} />
       {unit && <span>{unit}</span>}
     </label>
   );

@@ -2,8 +2,7 @@ import Survey from '@/components/survey/Survey';
 import useFunnel from '@/hooks/useFunnel';
 import useForm from '@/hooks/useUpdateForm';
 import { useRouter } from 'next/router';
-
-const MAX_STEP = 2;
+import { MAX_STEP } from './Calculator.constant';
 
 const CalculatorContainer = () => {
   const router = useRouter();
@@ -72,9 +71,9 @@ const CalculatorContainer = () => {
               <Survey.InputNumber
                 name={'step1-3'}
                 placeholder="0"
-                maxLength={2}
                 onChange={updateForm}
                 disabled={form['step1-2'] == 0}
+                maxNumber={2}
                 unit="명"
               />
             </Survey.Answer>
@@ -116,7 +115,7 @@ const CalculatorContainer = () => {
           <Survey.Box>
             <Survey.Question>배우자가 실제상속받은 금액을 입력하세요.</Survey.Question>
             <Survey.Answer>
-              <Survey.InputText name={'step2-3'} onChange={updateForm} placeholder={0} unit="원" />
+              <Survey.InputPrice name={'step2-3'} onChange={updateForm} placeholder={0} unit="원" />
             </Survey.Answer>
             {/* <Survey.Tip>*최소금액(5억) ~ 최대금액(상속재산범위까지)</Survey.Tip> */}{' '}
           </Survey.Box>
@@ -216,13 +215,13 @@ const CalculatorContainer = () => {
             <Survey.Box>
               <Survey.Question>동거상속주택의 금액을 입력하세요</Survey.Question>
               <Survey.Answer>
-                <Survey.InputText name={'step2-7-1'} onChange={updateForm} value={0} unit="원" />
+                <Survey.InputPrice name={'step2-7-1'} onChange={updateForm} placeholder={0} unit="원" />
               </Survey.Answer>
             </Survey.Box>
             <Survey.Box>
               <Survey.Question>동거상속주택의 채무금액을 입력하세요</Survey.Question>
               <Survey.Answer>
-                <Survey.InputText name={'step2-7-2'} onChange={updateForm} value={0} unit="원" />
+                <Survey.InputPrice name={'step2-7-2'} onChange={updateForm} placeholder={0} unit="원" />
               </Survey.Answer>
             </Survey.Box>
 
@@ -316,15 +315,10 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '부동산') && (
               <>
-                <Survey.InputText
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  value={0}
-                  placeholder="아파트, 상가, 토지등의 부동산가액을 입력하세요."
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
                 <Survey.Tip>
-                  *부동산가액은 상속개시일 현재의 시가를 입력하며, 시가가 없는경우에는 기준시가를 입력하세요.
+                  * 아파트, 상가, 토지등의 부동산가액을 입력하세요.
+                  <br />* 부동산가액은 상속개시일 현재의 시가를 입력하며, 시가가 없는경우에는 기준시가를 입력하세요.
                 </Survey.Tip>
               </>
             )}
@@ -336,13 +330,9 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '금융재산') && (
               <>
-                <Survey.InputText
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  value={0}
-                  placeholder="현금, 예적금, 주식, 출자금등의 금융재산을 금액을 입력하세요."
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
+
+                <Survey.Tip>* 현금, 예적금, 주식, 출자금등의 금융재산을 금액을 입력하세요.</Survey.Tip>
               </>
             )}
             <br />
@@ -353,13 +343,10 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '기타재산') && (
               <>
-                <Survey.InputText
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  value={0}
-                  placeholder="전세권, 임차보증금, 분양권등 부동산, 금융재산 이외의 재산적가치가 있는 권리등의 금액을 입력하세요."
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
+                <Survey.Tip>
+                  * 전세권, 임차보증금, 분양권등 부동산, 금융재산 이외의 재산적가치가 있는 권리등의 금액을 입력하세요.
+                </Survey.Tip>
               </>
             )}
             <br />
@@ -369,13 +356,9 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '퇴직금보험금신탁재산') && (
               <>
-                <Survey.InputText
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  value={0}
-                  placeholder="퇴직금, 보험금, 신탁재산가액을 입력하세요."
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
+
+                <Survey.Tip>* 퇴직금, 보험금, 신탁재산가액을 입력하세요.</Survey.Tip>
               </>
             )}
             <br />
@@ -396,13 +379,8 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '일반채무') && (
               <>
-                <Survey.InputText
-                  name={'step2-8-2'}
-                  onChange={updateForm}
-                  value={0}
-                  placeholder="피상속인(사망자)의 채무금액을 입력하세요. (예: 임대보증금 등)"
-                  unit="원"
-                />
+                <Survey.InputPrice name={'step2-8-2'} onChange={updateForm} placeholder={0} unit="원" />
+                <Survey.Tip>* 피상속인(사망자)의 채무금액을 입력하세요. (예: 임대보증금 등)</Survey.Tip>
               </>
             )}
             <br />
@@ -413,13 +391,13 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '금융기관채무') && (
               <>
-                <Survey.InputText
+                <Survey.InputPrice
                   name={'step2-8-2'}
                   onChange={updateForm}
-                  value={0}
-                  placeholder="피상속인(사망자)의 채무금액을 입력하세요. (예: 근저당권, 은행채무 등)"
+                  placeholder={0}
                   unit="원"
                 />
+                <Survey.Tip>* 피상속인(사망자)의 채무금액을 입력하세요. (예: 근저당권, 은행채무 등)</Survey.Tip>
               </>
             )}
             <br />
@@ -430,13 +408,13 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '공과금') && (
               <>
-                <Survey.InputText
+                <Survey.InputPrice
                   name={'step2-8-2'}
                   onChange={updateForm}
-                  value={0}
-                  placeholder="피상속인(사망자)의 공과금을 입력하세요. (예: 미납세금, 미납 공공요금 등)"
+                  placeholder={0}
                   unit="원"
                 />
+                <Survey.Tip>* 피상속인(사망자)의 공과금을 입력하세요. (예: 미납세금, 미납 공공요금 등)</Survey.Tip>
               </>
             )}
             <br />
@@ -446,11 +424,10 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '장례비') && (
               <>
-                <Survey.InputText
+                <Survey.InputPrice
                   name={'step2-8-2'}
                   onChange={updateForm}
-                  value={0}
-                  placeholder="장례비용을 입력하세요."
+                  placeholder={0}
                   unit="원"
                 />
                 <Survey.Tip>
@@ -469,11 +446,10 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '봉안시설자연장지비용') && (
               <>
-                <Survey.InputText
+                <Survey.InputPrice
                   name={'step2-8-2'}
                   onChange={updateForm}
-                  value={0}
-                  placeholder="봉안시설, 자연장지비용을 입력하세요."
+                  placeholder={0}
                   unit="원"
                 />
                 <Survey.Tip>
@@ -490,11 +466,10 @@ const CalculatorContainer = () => {
             </Survey.Checkbox>
             {form['step2-9'].some(v => v === '감정평가수수료') && (
               <>
-                <Survey.InputText
+                <Survey.InputPrice
                   name={'step2-8-2'}
                   onChange={updateForm}
-                  value={0}
-                  placeholder="상속재산을 감정평가 받은 경우 해당 수수료를 입력하세요."
+                  placeholder={0}
                   unit="원"
                 />
                 <Survey.Tip>
@@ -518,14 +493,17 @@ const CalculatorContainer = () => {
         <Survey.Box>
           <Survey.Question>5년이내에 상속인 외 사람에게 사전에 증여한 재산이 있나요?</Survey.Question>
           <Survey.Answer>
-            <Survey.InputText
+            <Survey.InputPrice
               name={'step5-1'}
               onChange={updateForm}
-              value={0}
-              placeholder="사전증여재산가액 (합산)을 입력하세요."
+              
+              placeholder={0}
               unit="원"
             />
-            <Survey.Tip>* "상속인 외"는 1.기본사항(상속인) 대상자에 해당되지 않는 자를 의미합니다.</Survey.Tip>
+            <Survey.Tip>
+            * 사전증여재산가액 (합산)을 입력하세요.<br />
+              * "상속인 외"는 1.기본사항(상속인) 대상자에 해당되지 않는 자를 의미합니다.
+              </Survey.Tip>
           </Survey.Answer>
         </Survey.Box>
 
@@ -541,15 +519,15 @@ const CalculatorContainer = () => {
 
                   {form['step5-2-1'] && (
                     <>
-                      <Survey.InputText
+                      <Survey.InputPrice
                         name={'step5-2'}
                         onChange={updateForm}
-                        value={0}
-                        placeholder="배우자 사전증여재산가액 입력하세요. (합산)"
+                        placeholder={0}
                         unit="원"
                       />
                       <Survey.Tip>
-                        *부동산가액은 상속개시일 현재의 시가를 입력하며, 시가가 없는경우에는 기준시가를 입력하세요.
+                        * 배우자 사전증여재산가액 입력하세요. (합산)<br />
+                        * 부동산가액은 상속개시일 현재의 시가를 입력하며, 시가가 없는경우에는 기준시가를 입력하세요.
                       </Survey.Tip>
                     </>
                   )}
@@ -559,29 +537,31 @@ const CalculatorContainer = () => {
               {/* Array.from({length: form['step1-2'] ?? 0}) */}
               {Array.from({ length: form['step1-2'] ?? 0 }).map((c, index) => (
                 <Survey.Box key={`step5-${index}`}>
-                  <Survey.Checkbox name="step5-3" value={`자녀${index}`} onChange={updateForm}>
+                  <Survey.Checkbox name="step5-3" value={`자녀${index.toString()}`} onChange={updateForm}>
                     자녀 {Number(index + 1)}
                   </Survey.Checkbox>
                   {form['step5-3']?.some(v => v === `자녀${index}`) && (
                     <>
-                      <Survey.Radio name={`step5-3-${index}`} value="Y" onChange={updateForm}>
+                      <Survey.Radio name={`step5-3-${index}-1`} onChange={updateForm}>
                         미성년자여부
                       </Survey.Radio>
-                      <Survey.InputText
-                        name={`step5-3-${index}`}
+                      <Survey.InputPrice
+                        name={`step5-3-${index}-2`}
                         onChange={updateForm}
-                        value={0}
-                        placeholder={`자녀 ${index}의 사전증여재산가액을 입력하세요. (합산)`}
+                        placeholder={0}
                         unit="원"
                       />
+                      <Survey.Tip>
+                      * 자녀 {index + 1}의 사전증여재산가액을 입력하세요. (합산)
+                      </Survey.Tip>
                     </>
                   )}
                 </Survey.Box>
               ))}
 
               <Survey.Tip>
-                * 피상속인이 증여한 상속인을 체크하세요.
-                <br />* 증여일 현재 만19세 미만인 자인 경우 미성년자를 체크하세요.
+                * 피상속인이 증여한 상속인을 체크하세요. <br />
+                * 증여일 현재 만19세 미만인 자인 경우 미성년자를 체크하세요.
               </Survey.Tip>
             </Survey.Answer>
           </Survey.Box>
@@ -629,7 +609,7 @@ const CalculatorContainer = () => {
             <Survey.Box>
               <Survey.Question>이전 상속세 산출세액을 입력하세요.</Survey.Question>
               <Survey.Answer>
-                <Survey.InputText name={'step6-4'} onChange={updateForm} placeholder={0} unit="원" />
+                <Survey.InputPrice name={'step6-4'} onChange={updateForm} placeholder={0} unit="원" />
               </Survey.Answer>
             </Survey.Box>
 
@@ -638,7 +618,7 @@ const CalculatorContainer = () => {
                 재상속되는 그 재산가액이 이전 전체 상속재산 중 차지하는 비율을 입력하세요.
               </Survey.Question>
               <Survey.Answer>
-                <Survey.InputText name={'step6-5'} onChange={updateForm} placeholder={0} maxLength={3} unit="%" />
+                <Survey.InputNumber name={'step6-5'} placeholder={0} maxCount={100} unit="%" onChange={updateForm}/>
               </Survey.Answer>
             </Survey.Box>
           </>
